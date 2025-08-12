@@ -1,29 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-#define MAX_SIZE 5
+#define SIZE 5
+int queue[SIZE], front = -1, rear = -1, item;
 
-int queue[MAX_SIZE], front = -1, rear = -1;
-
-void enqueue(int element)
+void enqueue(int item1)
 {
-    if (rear == MAX_SIZE - 1)
+    if ((rear + 1) % SIZE == front)
         printf("\nQueue is Full.");
     else if (front == -1 && rear == -1)
     {
-        front = rear = 0;
-        queue[rear] = element;
+        front = rear = 0;   
+        queue[rear] = item1;
     }
     else
     {
-        rear++;
-        queue[rear] = element;
+        rear = (rear + 1) % SIZE;
+        queue[rear] = item1;
     }
 }
-
 int dequeue()
 {
-    int item;
     if (front == -1 && rear == -1)
     {
         printf("\nQueue is empty.");
@@ -37,49 +34,50 @@ int dequeue()
     }
     else
     {
-        item = queue[front++];
+        item = queue[front];
+        front = (front + 1) % SIZE;
         return item;
     }
 }
-void peak()
+void peek()
 {
-    if (front == -1 && rear == -1)
-        printf("\nQueue is Empty.");
+    if (rear == -1)
+        printf("\nQueue is Empty.\n");
     else
-    {
-        printf("The peak element is: %d", queue[rear]);
-    }
+        printf("First element is %d\n", queue[front]);
 }
 void display()
 {
-    if (front == -1 && rear == -1)
-        printf("\nQueue is Empty.");
+    if (rear == -1)
+        printf("\nQueue is Empty.\n");
     else
     {
-        for (int i = front; i <= rear; i++)
+        for (int i = front; i != rear; i = (i + 1) % SIZE)
             printf("%d\t", queue[i]);
+        printf("%d\t", queue[rear]);
     }
 }
+
 int main()
 {
-    int ch, data;
+    int ch;
     do
     {
-        printf("\n\nQueue Implementaion Using Arrays.\n1.Inqueue\n2.Dequeue\n3.Peak\n4.Display\n5.Exit");
-        printf("\nEnter your choice (1 to 5) only: ");
+        printf("\nQueue using arrays.\n1.Enqueue\n2.Dequeue\n3.Peek\n4.All elements\n5.Exit\nEnter your choice: ");
         scanf("%d", &ch);
         switch (ch)
         {
         case 1:
-            printf("\nEnter data to insert: ");
-            scanf("%d", &data);
-            enqueue(data);
+            int a;
+            printf("\nEnter: ");
+            scanf("%d", &a);
+            enqueue(a);
             break;
         case 2:
-            printf("\nDeleted: %d", dequeue);
+            dequeue();
             break;
         case 3:
-            peak();
+            peek();
             break;
         case 4:
             display();
@@ -87,9 +85,9 @@ int main()
         case 5:
             break;
         default:
-            printf("\nIncorrect choice.");
+            printf("\nIncorrect Choice!");
+            break;
         }
-        // system("cls");
     } while (ch != 5);
     return 0;
 }

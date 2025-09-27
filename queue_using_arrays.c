@@ -76,7 +76,7 @@ int main()
             enqueue(data);
             break;
         case 2:
-            printf("\nDeleted: %d", dequeue);
+            printf("\nDeleted: %d", dequeue());
             break;
         case 3:
             peak();
@@ -92,4 +92,5 @@ int main()
         // system("cls");
     } while (ch != 5);
     return 0;
+
 }

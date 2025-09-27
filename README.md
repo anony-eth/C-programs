@@ -1,1 +1,1 @@
-This is the end or the Beginning of a great future.
+This isn't "THE END" its "THE BEGINNING"
